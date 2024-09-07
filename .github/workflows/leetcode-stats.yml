@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Update LeetCode Stats in README
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v3 # Updated to v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3 # Updated to v3
       
       - name: Fetch LeetCode Data
         run: |
