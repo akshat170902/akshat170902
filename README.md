@@ -58,9 +58,9 @@
 ---
 ## My LeetCode Stats
 
-- LeetCode Solved: 0
-- LeetCode Contributions: 0
-- LeetCode Upvotes: 0
+- LeetCode Solved: 1003
+- LeetCode Contributions: 5734
+- LeetCode Upvotes: null
 
 ---
 # 📊 GitHub Stats:
