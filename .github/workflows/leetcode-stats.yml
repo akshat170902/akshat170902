@@ -17,34 +17,32 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Fetch LeetCode Streak
+      - name: Fetch LeetCode Profile Calendar
         run: |
           curl -s https://leetcode.com/graphql/ \
             -H "Content-Type: application/json" \
-            -d '{"query": "query getStreakCounter { streakCounter { streakCount daysSkipped currentDayCompleted }}"}' > streak_data.json
+            -d '{"operationName":"userProfileCalendar","query":"query userProfileCalendar($username: String!, $year: Int) { matchedUser(username: $username) { userCalendar(year: $year) { activeYears streak totalActiveDays dccBadges { timestamp badge { name icon } } submissionCalendar } } }","variables":{"username":"Conquistador17"}}' > profile_data.json
 
       - name: Validate JSON
         run: |
-          if ! jq -e . >/dev/null 2>&1 <<<$(cat streak_data.json); then
-            echo "Failed to fetch or parse the streak data"
+          if ! jq -e . >/dev/null 2>&1 <<<$(cat profile_data.json); then
+            echo "Failed to fetch or parse the profile data"
             exit 1
           fi
 
       - name: Update README
         run: |
-          streakCount=$(jq .data.streakCounter.streakCount streak_data.json)
-          daysSkipped=$(jq .data.streakCounter.daysSkipped streak_data.json)
-          currentDayCompleted=$(jq .data.streakCounter.currentDayCompleted streak_data.json)
+          streak=$(jq .data.matchedUser.userCalendar.streak profile_data.json)
+          totalActiveDays=$(jq .data.matchedUser.userCalendar.totalActiveDays profile_data.json)
 
-          # Update README.md with streak data
-          sed -i "s/LeetCode Streak:.*$/LeetCode Streak: ${streakCount}/" README.md
-          sed -i "s/Days Skipped:.*$/Days Skipped: ${daysSkipped}/" README.md
-          sed -i "s/Current Day Completed:.*$/Current Day Completed: ${currentDayCompleted}/" README.md
+          # Update README.md with profile calendar data
+          sed -i "s/LeetCode Streak:.*$/LeetCode Streak: ${streak}/" README.md
+          sed -i "s/Total Active Days:.*$/Total Active Days: ${totalActiveDays}/" README.md
 
       - name: Commit changes
         run: |
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
-          git add README.md streak_data.json # Add both README.md and streak_data.json
-          git commit -m "Update LeetCode streak stats"
+          git add README.md profile_data.json
+          git commit -m "Update LeetCode profile calendar stats"
           git push origin main
