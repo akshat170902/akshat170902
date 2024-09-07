@@ -58,20 +58,20 @@
 ---
 # My LeetCode Stats
 
-## LeetCode Streak:
-LeetCode Streak: **0**  <!-- Placeholder for streak -->
+## LeetCode Streak: 42
+LeetCode Streak: 42
 
-## Total Active Days:
-Total Active Days: **0**  <!-- Placeholder for total active days -->
+## Total Active Days: 346
+Total Active Days: 346
 
-## Post View Count:
-Post View Count: **0**  <!-- Placeholder for post view count -->
+## Post View Count: 177004
+Post View Count: 177004
 
-## Post View Count Difference:
-Post View Count Difference: **0**  <!-- Placeholder for post view count difference -->
+## Post View Count Difference: 202
+Post View Count Difference: 202
 
-## Reputation:
-Reputation: **0**  <!-- Placeholder for reputation -->
+## Reputation: 1909
+Reputation: 1909
 
 ---
 # 📊 GitHub Stats:
