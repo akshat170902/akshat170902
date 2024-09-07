@@ -1,4 +1,4 @@
-name: Update LeetCode Streak
+name: Update LeetCode Stats and Streak
 
 on:
   schedule:
@@ -17,39 +17,72 @@ jobs:
         with:
           node-version: '16'
 
+      # Step 1: Fetch LeetCode Profile Calendar (for streak and total active days)
       - name: Fetch LeetCode Profile Calendar
         run: |
           curl -s https://leetcode.com/graphql/ \
             -H "Content-Type: application/json" \
-            -d '{"operationName":"userProfileCalendar","query":"query userProfileCalendar($username: String!, $year: Int) { matchedUser(username: $username) { userCalendar(year: $year) { activeYears streak totalActiveDays dccBadges { timestamp badge { name icon } } submissionCalendar } } }","variables":{"username":"Conquistador17"}}' > profile_data.json
+            -d '{"operationName":"userProfileCalendar","query":"query userProfileCalendar($username: String!, $year: Int) { matchedUser(username: $username) { userCalendar(year: $year) { streak totalActiveDays } } }","variables":{"username":"Conquistador17"}}' > profile_calendar_data.json
 
-      - name: Output fetched data (for debugging)
+      - name: Output profile calendar data (for debugging)
         run: |
-          cat profile_data.json
+          cat profile_calendar_data.json
 
-      - name: Validate JSON
+      - name: Validate profile calendar JSON
         run: |
-          if ! jq -e . >/dev/null 2>&1 <<<$(cat profile_data.json); then
-            echo "Failed to fetch or parse the profile data"
+          if ! jq -e . >/dev/null 2>&1 <<<$(cat profile_calendar_data.json); then
+            echo "Failed to fetch or parse the profile calendar data"
             exit 1
           fi
 
+      # Step 2: Fetch LeetCode Public Profile (for postViewCount, postViewCountDiff, and reputation)
+      - name: Fetch LeetCode Public Profile
+        run: |
+          curl -s https://leetcode.com/graphql/ \
+            -H "Content-Type: application/json" \
+            -d '{"operationName":"userPublicProfile","query":"query userPublicProfile($username: String!) { matchedUser(username: $username) { profile { postViewCount postViewCountDiff reputation } } }","variables":{"username":"Conquistador17"}}' > profile_stats_data.json
+
+      - name: Output profile stats data (for debugging)
+        run: |
+          cat profile_stats_data.json
+
+      - name: Validate profile stats JSON
+        run: |
+          if ! jq -e . >/dev/null 2>&1 <<<$(cat profile_stats_data.json); then
+            echo "Failed to fetch or parse the profile stats data"
+            exit 1
+          fi
+
+      # Step 3: Update README with streak, total active days, post view count, and reputation
       - name: Update README
         run: |
-          streak=$(jq .data.matchedUser.userCalendar.streak profile_data.json)
-          totalActiveDays=$(jq .data.matchedUser.userCalendar.totalActiveDays profile_data.json)
+          # Extract values from profile calendar data
+          streak=$(jq .data.matchedUser.userCalendar.streak profile_calendar_data.json)
+          totalActiveDays=$(jq .data.matchedUser.userCalendar.totalActiveDays profile_calendar_data.json)
+
+          # Extract values from profile stats data
+          postViewCount=$(jq .data.matchedUser.profile.postViewCount profile_stats_data.json)
+          postViewCountDiff=$(jq .data.matchedUser.profile.postViewCountDiff profile_stats_data.json)
+          reputation=$(jq .data.matchedUser.profile.reputation profile_stats_data.json)
 
           echo "Streak: $streak"
           echo "Total Active Days: $totalActiveDays"
+          echo "Post View Count: $postViewCount"
+          echo "Post View Count Difference: $postViewCountDiff"
+          echo "Reputation: $reputation"
 
-          # Update README.md with profile calendar data
+          # Update README.md with both profile calendar and public profile data
           sed -i "s/LeetCode Streak:.*$/LeetCode Streak: ${streak}/" README.md
           sed -i "s/Total Active Days:.*$/Total Active Days: ${totalActiveDays}/" README.md
+          sed -i "s/Post View Count:.*$/Post View Count: ${postViewCount}/" README.md
+          sed -i "s/Post View Count Difference:.*$/Post View Count Difference: ${postViewCountDiff}/" README.md
+          sed -i "s/Reputation:.*$/Reputation: ${reputation}/" README.md
 
+      # Step 4: Commit and push the changes
       - name: Commit changes
         run: |
-          git config --global user.email "akshat170902@example.com"
-          git config --global user.name "akshat"
-          git add README.md profile_data.json
-          git commit -m "Update LeetCode profile calendar stats"
+          git config --global user.email "a@example.com"
+          git config --global user.name "a"
+          git add README.md profile_calendar_data.json profile_stats_data.json
+          git commit -m "Update LeetCode profile calendar and stats"
           git push origin main
