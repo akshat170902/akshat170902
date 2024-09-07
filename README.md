@@ -56,22 +56,51 @@
 </a>
 
 ---
-# My LeetCode Stats
+# 🚀 My LeetCode Journey 🚀
 
-## LeetCode Streak: 42
-LeetCode Streak: 42
+Welcome to my LeetCode journey! Here you can find my up-to-date coding progress and stats. Follow along as I continue to solve problems and grow my skills.
 
-## Total Active Days: 346
-Total Active Days: 346
+---
 
-## Post View Count: 177004
-Post View Count: 177004
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/36547915/97088991-45da5d00-1652-11eb-900f-80d106540f4f.png" alt="LeetCode Logo" height="100" />
+  <h2>👨‍💻 Conquistador17's LeetCode Stats 👨‍💻</h2>
+</div>
 
-## Post View Count Difference: 202
-Post View Count Difference: 202
+---
 
-## Reputation: 1909
-Reputation: 1909
+## 📊 Current Progress:
+
+| 🔥 **LeetCode Streak** | 🌟 **Total Active Days** | 🏆 **Reputation** | 📈 **Post View Count** | 📉 **Post View Count Difference** |
+|------------------------|-------------------------|------------------|------------------------|----------------------------------|
+| LeetCode Streak: **0**  | Total Active Days: **0** | Reputation: **0**| Post View Count: **0** | Post View Count Difference: **0**|
+
+---
+
+<div align="center">
+  <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" alt="Coding GIF" width="400"/>
+</div>
+
+---
+
+## 🛠 Tools & Technologies I Use:
+- **Languages**: JavaScript, Python, C++
+- **LeetCode Profile**: [Check out my profile!](https://leetcode.com/Conquistador17)
+
+---
+
+## 🏅 Badges:
+<div align="center">
+  <img src="https://leetcode.com/static/images/badges/knight.png" alt="Knight Badge" width="50"/>
+  <p>Knight - Top 25% site-wide (20,668 total)</p>
+</div>
+
+---
+
+<div align="center">
+  <h3>Keep Coding and Stay Awesome! 💻🚀</h3>
+  <img src="https://media.giphy.com/media/4Zo41lhzKt6iZ8xff9/giphy.gif" alt="Keep Coding GIF" width="300" />
+</div>
 
 ---
 # 📊 GitHub Stats:
