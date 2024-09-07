@@ -2,33 +2,40 @@ name: Update LeetCode Stats
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs every hour
+    - cron: '0 * * * *' # Run every hour
   workflow_dispatch:
 
 jobs:
-  update-stats:
+  update-leetcode-stats:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3 # Updated to v3
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3 # Updated to v3
-      
-      - name: Fetch LeetCode Data
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Fetch LeetCode Stats
         run: |
           curl -s https://leetcode-stats-api.herokuapp.com/Conquistador17 > leetcode_stats.json
-      
-      - name: Update README.md with stats
+
+      - name: Extract Stats and Update README
         run: |
-          total_solved=$(cat leetcode_stats.json | jq .totalSolved)
-          streak=$(cat leetcode_stats.json | jq .streak)
-          sed -i "s/LeetCode Stats:.*$/LeetCode Stats: ${total_solved} solved, ${streak} days streak/" README.md
-      
+          solved=$(cat leetcode_stats.json | jq .totalSolved)
+          contributions=$(cat leetcode_stats.json | jq .contributionPoints)
+          upvotes=$(cat leetcode_stats.json | jq .totalUpvotes)
+
+          # Update README.md with the fetched stats
+          sed -i "s/LeetCode Solved:.*$/LeetCode Solved: ${solved}/" README.md
+          sed -i "s/LeetCode Contributions:.*$/LeetCode Contributions: ${contributions}/" README.md
+          sed -i "s/LeetCode Upvotes:.*$/LeetCode Upvotes: ${upvotes}/" README.md
+
       - name: Commit changes
         run: |
-          git config --global user.email "akshat170902@example.com"
-          git config --global user.name "akshat"
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
           git add README.md
           git commit -m "Update LeetCode stats"
-          git push
+          git push origin main
