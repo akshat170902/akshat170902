@@ -64,7 +64,7 @@ Welcome to my LeetCode journey! Here you can find my up-to-date coding progress 
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/36547915/97088991-45da5d00-1652-11eb-900f-80d106540f4f.png" alt="LeetCode Logo" height="100" />
-  <h2>👨‍💻 Conquistador17's LeetCode Stats 👨‍💻</h2>
+  <h2>👨‍💻 LeetCode Stats 👨‍💻</h2>
 </div>
 
 ---
@@ -85,11 +85,31 @@ Welcome to my LeetCode journey! Here you can find my up-to-date coding progress 
 
 ## 🛠 Tools & Technologies I Use:
 - **Languages**: JavaScript, Python, C++
-- **LeetCode Profile**: [Check out my profile!](https://leetcode.com/Conquistador17)
+- **LeetCode Profile**: [Check out my profile!](https://leetcode.com/#)
 
 ---
 
 ## 🏅 Badges:
+
+### 2024 Badges
+<div align="center">
+  <img src="https://assets.leetcode.com/static_assets/marketing/2024-200-lg.png" alt="200 Days Badge 2024" width="100"/>
+  <img src="https://assets.leetcode.com/static_assets/marketing/2024-100-lg.png" alt="100 Days Badge 2024" width="100"/>
+  <img src="https://assets.leetcode.com/static_assets/marketing/2024-50-lg.png" alt="50 Days Badge 2024" width="100"/>
+</div>
+
+### 2023 Badges
+<div align="center">
+  <img src="https://assets.leetcode.com/static_assets/marketing/lg2023.png" alt="Annual Badge 2023" width="100"/>
+  <img src="https://assets.leetcode.com/static_assets/marketing/lg50.png" alt="50 Days Badge 2023" width="100"/>
+  <img src="https://assets.leetcode.com/static_assets/marketing/lg100.png" alt="100 Days Badge 2023" width="100"/>
+</div>
+
+### 2022 Badge
+<div align="center">
+  <img src="https://leetcode.com/static/images/badges/2022/lg/2022-annual.png" alt="Annual Badge 2022" width="100"/>
+</div>
+
 <div align="center">
   <img src="https://leetcode.com/static/images/badges/knight.png" alt="Knight Badge" width="50"/>
   <p>Knight - Top 25% site-wide (20,668 total)</p>
