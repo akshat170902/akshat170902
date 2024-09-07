@@ -56,11 +56,22 @@
 </a>
 
 ---
-## My LeetCode Stats
+# My LeetCode Stats
 
-- LeetCode Solved: 1003
-- LeetCode Contributions: 5734
-- LeetCode Upvotes: null
+## LeetCode Streak:
+LeetCode Streak: **0**  <!-- Placeholder for streak -->
+
+## Total Active Days:
+Total Active Days: **0**  <!-- Placeholder for total active days -->
+
+## Post View Count:
+Post View Count: **0**  <!-- Placeholder for post view count -->
+
+## Post View Count Difference:
+Post View Count Difference: **0**  <!-- Placeholder for post view count difference -->
+
+## Reputation:
+Reputation: **0**  <!-- Placeholder for reputation -->
 
 ---
 # 📊 GitHub Stats:
