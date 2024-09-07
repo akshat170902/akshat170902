@@ -1,0 +1,34 @@
+name: Update LeetCode Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every hour
+  workflow_dispatch:
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Update LeetCode Stats in README
+        uses: actions/setup-node@v2
+      
+      - name: Fetch LeetCode Data
+        run: |
+          curl -s https://leetcode-stats-api.herokuapp.com/Conquistador17 > leetcode_stats.json
+      
+      - name: Update README.md with stats
+        run: |
+          total_solved=$(cat leetcode_stats.json | jq .totalSolved)
+          streak=$(cat leetcode_stats.json | jq .streak)
+          sed -i "s/LeetCode Stats:.*$/LeetCode Stats: ${total_solved} solved, ${streak} days streak/" README.md
+      
+      - name: Commit changes
+        run: |
+          git config --global user.email "akshat170902@example.com"
+          git config --global user.name "akshat"
+          git add README.md
+          git commit -m "Update LeetCode stats"
+          git push

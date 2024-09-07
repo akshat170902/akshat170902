@@ -56,7 +56,10 @@
 </a>
 
 ---
-
+## LeetCode Stats:
+- Total Questions Solved: 
+- Streak: 
+---~
 # 📊 GitHub Stats:
 
 
