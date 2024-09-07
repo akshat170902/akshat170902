@@ -56,7 +56,7 @@
 </a>
 
 ---
-## LeetCode Stats:
+## LeetCode Stats: 1003 solved, null days streak
 - Total Questions Solved: 
 - Streak: 
 ---~
