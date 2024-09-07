@@ -56,10 +56,13 @@
 </a>
 
 ---
-## LeetCode Stats:
-- Total Questions Solved: 
-- Streak: 
----~
+## My LeetCode Stats
+
+- LeetCode Solved: 0
+- LeetCode Contributions: 0
+- LeetCode Upvotes: 0
+
+---
 # 📊 GitHub Stats:
 
 
