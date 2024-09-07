@@ -42,6 +42,7 @@ jobs:
         run: |
           git config --global user.email "akshat170902@example.com"
           git config --global user.name "akshat"
-          git add .
+          git add README.md
+          git add streak_data.json
           git commit -m "Update LeetCode streak stats"
           git push origin main
