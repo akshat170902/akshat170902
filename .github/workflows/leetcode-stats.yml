@@ -1,4 +1,4 @@
-name: Update LeetCode Stats
+name: Update LeetCode Streak
 
 on:
   schedule:
@@ -17,25 +17,28 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Fetch LeetCode Stats
+      - name: Fetch LeetCode Streak
         run: |
-          curl -s https://leetcode-stats-api.herokuapp.com/Conquistador17 > leetcode_stats.json
+          curl -s https://leetcode.com/graphql/ \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer YOUR_SESSION_TOKEN" \
+            -d '{"query": "query getStreakCounter { streakCounter { streakCount daysSkipped currentDayCompleted }}"}' > streak_data.json
 
-      - name: Extract Stats and Update README
+      - name: Update README
         run: |
-          solved=$(cat leetcode_stats.json | jq .totalSolved)
-          contributions=$(cat leetcode_stats.json | jq .contributionPoints)
-          upvotes=$(cat leetcode_stats.json | jq .totalUpvotes)
+          streakCount=$(cat streak_data.json | jq .data.streakCounter.streakCount)
+          daysSkipped=$(cat streak_data.json | jq .data.streakCounter.daysSkipped)
+          currentDayCompleted=$(cat streak_data.json | jq .data.streakCounter.currentDayCompleted)
 
-          # Update README.md with the fetched stats
-          sed -i "s/LeetCode Solved:.*$/LeetCode Solved: ${solved}/" README.md
-          sed -i "s/LeetCode Contributions:.*$/LeetCode Contributions: ${contributions}/" README.md
-          sed -i "s/LeetCode Upvotes:.*$/LeetCode Upvotes: ${upvotes}/" README.md
+          # Update README.md with streak data
+          sed -i "s/LeetCode Streak:.*$/LeetCode Streak: ${streakCount}/" README.md
+          sed -i "s/Days Skipped:.*$/Days Skipped: ${daysSkipped}/" README.md
+          sed -i "s/Current Day Completed:.*$/Current Day Completed: ${currentDayCompleted}/" README.md
 
       - name: Commit changes
         run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "akshat170902@example.com"
+          git config --global user.name "akshat"
           git add README.md
-          git commit -m "Update LeetCode stats"
+          git commit -m "Update LeetCode streak stats"
           git push origin main
