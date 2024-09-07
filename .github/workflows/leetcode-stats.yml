@@ -23,6 +23,10 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{"operationName":"userProfileCalendar","query":"query userProfileCalendar($username: String!, $year: Int) { matchedUser(username: $username) { userCalendar(year: $year) { activeYears streak totalActiveDays dccBadges { timestamp badge { name icon } } submissionCalendar } } }","variables":{"username":"Conquistador17"}}' > profile_data.json
 
+      - name: Output fetched data (for debugging)
+        run: |
+          cat profile_data.json
+
       - name: Validate JSON
         run: |
           if ! jq -e . >/dev/null 2>&1 <<<$(cat profile_data.json); then
@@ -35,14 +39,17 @@ jobs:
           streak=$(jq .data.matchedUser.userCalendar.streak profile_data.json)
           totalActiveDays=$(jq .data.matchedUser.userCalendar.totalActiveDays profile_data.json)
 
+          echo "Streak: $streak"
+          echo "Total Active Days: $totalActiveDays"
+
           # Update README.md with profile calendar data
           sed -i "s/LeetCode Streak:.*$/LeetCode Streak: ${streak}/" README.md
           sed -i "s/Total Active Days:.*$/Total Active Days: ${totalActiveDays}/" README.md
 
       - name: Commit changes
         run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "akshat170902@example.com"
+          git config --global user.name "akshat"
           git add README.md profile_data.json
           git commit -m "Update LeetCode profile calendar stats"
           git push origin main
