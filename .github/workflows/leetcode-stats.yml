@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-leetcode-stats:
+  update-leetcode-streak:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -17,28 +17,31 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Fetch LeetCode Streak
+      - name: Fetch LeetCode Streak Data
+        id: fetch_streak
         run: |
           curl -s https://leetcode.com/graphql/ \
             -H "Content-Type: application/json" \
+            -H "Referer: https://leetcode.com/" \
             -H "Authorization: Bearer YOUR_SESSION_TOKEN" \
             -d '{"query": "query getStreakCounter { streakCounter { streakCount daysSkipped currentDayCompleted }}"}' > streak_data.json
 
-      - name: Update README
+      - name: Extract and Update README
         run: |
-          streakCount=$(cat streak_data.json | jq .data.streakCounter.streakCount)
-          daysSkipped=$(cat streak_data.json | jq .data.streakCounter.daysSkipped)
-          currentDayCompleted=$(cat streak_data.json | jq .data.streakCounter.currentDayCompleted)
+          # Extract values from JSON
+          streakCount=$(jq -r .data.streakCounter.streakCount < streak_data.json)
+          daysSkipped=$(jq -r .data.streakCounter.daysSkipped < streak_data.json)
+          currentDayCompleted=$(jq -r .data.streakCounter.currentDayCompleted < streak_data.json)
 
-          # Update README.md with streak data
-          sed -i "s/LeetCode Streak:.*$/LeetCode Streak: ${streakCount}/" README.md
-          sed -i "s/Days Skipped:.*$/Days Skipped: ${daysSkipped}/" README.md
-          sed -i "s/Current Day Completed:.*$/Current Day Completed: ${currentDayCompleted}/" README.md
+          # Update README.md with the fetched data
+          sed -i "s/LeetCode Streak:.*$/LeetCode Streak: ${streakCount}/" README.md || echo "LeetCode Streak: ${streakCount}" >> README.md
+          sed -i "s/Days Skipped:.*$/Days Skipped: ${daysSkipped}/" README.md || echo "Days Skipped: ${daysSkipped}" >> README.md
+          sed -i "s/Current Day Completed:.*$/Current Day Completed: ${currentDayCompleted}/" README.md || echo "Current Day Completed: ${currentDayCompleted}" >> README.md
 
       - name: Commit changes
         run: |
           git config --global user.email "akshat170902@example.com"
           git config --global user.name "akshat"
-          git add README.md
+          git add .
           git commit -m "Update LeetCode streak stats"
           git push origin main
