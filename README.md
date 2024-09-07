@@ -31,7 +31,7 @@
 -  I am passionate about solving complex problems using innovative technologies and algorithms.
 - 🌱 <b>I’m currently learning</b> : <code>Data Structures</code>, <code>Full Stack Web Development</code>
 - 💬 <b>Ask me about</b>: <code>Problem Solving</code>, <code>Web Development</code>, <code>Git/Github</code>, <code>C++</code>,<code>OOPs</code>
-- 📫 <b>How to reach me</b> : <code><a href="https://www.linkedin.com/in/akshat_garg17/">LinkedIn</a></code>
+- 📫 <b>How to reach me</b> : <code><a href="https://www.linkedin.com/in/akshat-garg17/">LinkedIn</a></code>
 - 📫 Email: akshat7090@gmail.com; 
 <br><br><br><br>
 
