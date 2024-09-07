@@ -73,7 +73,7 @@ Welcome to my LeetCode journey! Here you can find my up-to-date coding progress 
 
 | 🔥 **LeetCode Streak** | 🌟 **Total Active Days** | 🏆 **Reputation** | 📈 **Post View Count** | 📉 **Post View Count Difference** |
 |------------------------|-------------------------|------------------|------------------------|----------------------------------|
-| LeetCode Streak: **0**  | Total Active Days: **0** | Reputation: **0**| Post View Count: **0** | Post View Count Difference: **0**|
+| LeetCode Streak: 42
 
 ---
 
