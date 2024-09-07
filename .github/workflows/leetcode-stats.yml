@@ -38,11 +38,13 @@ jobs:
           sed -i "s/Days Skipped:.*$/Days Skipped: ${daysSkipped}/" README.md || echo "Days Skipped: ${daysSkipped}" >> README.md
           sed -i "s/Current Day Completed:.*$/Current Day Completed: ${currentDayCompleted}/" README.md || echo "Current Day Completed: ${currentDayCompleted}" >> README.md
 
+      - name: Clean up
+        run: |
+          rm -f streak_data.json
+
       - name: Commit changes
         run: |
           git config --global user.email "akshat170902@example.com"
-          git config --global user.name "akshat"
+          git config --global user.name "Akshat"
           git add README.md
-          git add streak_data.json
-          git commit -m "Update LeetCode streak stats"
-          git push origin main
+          git diff-index --quiet HEAD || (git commit -m "Update LeetCode streak stats" && git push origin main)
